@@ -1,14 +1,16 @@
 package com.pauldaniv.promotion.yellowtaxi.totals.services;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 
 @Slf4j
 @Service
 public class TotalsService {
-    public void run(List<String> commands) {
-       log.info("msg=running commands={}", commands);
+
+    @Cacheable("itemCache")
+    public String run() {
+        return String.valueOf(System.currentTimeMillis());
     }
 }

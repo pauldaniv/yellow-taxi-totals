@@ -18,6 +18,6 @@ public class TotalsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        totalsService.run(List.of(args));
+        totalsService.run();
     }
 }
