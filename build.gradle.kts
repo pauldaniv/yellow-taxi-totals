@@ -37,6 +37,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-cache")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-jooq")
+    implementation("com.fasterxml.jackson.core:jackson-databind")
 
     runtimeOnly("org.postgresql:postgresql")
     jooqGenerator("org.postgresql:postgresql")
