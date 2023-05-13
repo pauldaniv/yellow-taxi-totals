@@ -1,13 +1,13 @@
 package com.pauldaniv.promotion.yellowtaxi.totals;
 
-import com.pauldaniv.promotion.yellowtaxi.totals.services.TotalsService;
+import com.pauldaniv.promotion.yellowtaxi.totals.service.TotalsService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import java.util.List;
-
+@Slf4j
 @SpringBootApplication
 @RequiredArgsConstructor
 public class TotalsApplication implements CommandLineRunner {
@@ -18,6 +18,6 @@ public class TotalsApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        totalsService.run();
+        log.info(totalsService.run());
     }
 }
