@@ -23,7 +23,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Silent dubious ownership of repository
-        run: git config --global --add safe.directory /__w/taxi-trip-api/taxi-trip-api
+        run: git config --global --add safe.directory /__w/yellow-taxi-totals/yellow-taxi-totals
       - name: Hack container for local development
         if: ${{ env.ACT }}
         run: |
