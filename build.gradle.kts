@@ -136,5 +136,6 @@ tasks.withType<Test> {
 }
 
 fun getParam(name: String, default: String? = ""): String? {
-    return (System.getenv("name") ?: default)
+    return System.getenv(name) ?: default
 }
+
