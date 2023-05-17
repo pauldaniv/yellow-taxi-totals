@@ -82,7 +82,7 @@ jooq {
                 logging = Logging.WARN
                 jdbc.apply {
                     driver = "org.postgresql.Driver"
-                    url = "jdbc:postgresql://localhost:5432/service"
+                    url = "jdbc:postgresql://${getParam("DB_HOST", "localhost")}:5432/service"
                     user = "service"
                     password = "letmeeeen"
 //                    properties.add(Property().apply {
@@ -133,4 +133,8 @@ tasks.withType<JavaCompile> {
 
 tasks.withType<Test> {
     useJUnitPlatform()
+}
+
+fun getParam(name: String, default: String? = ""): String? {
+    return (System.getenv("name") ?: default)
 }
