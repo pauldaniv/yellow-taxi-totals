@@ -5,4 +5,4 @@ pluginManagement {
     }
 }
 
-rootProject.name = "yellow-taxi-totals"
+rootProject.name = "taxi-trip-totals"

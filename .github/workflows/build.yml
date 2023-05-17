@@ -1,0 +1,60 @@
+# This workflow will build a Java project with Gradle
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: CI/CD workflow
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  publish:
+    name: CI/CD pipeline
+    env:
+      AWS_DOMAIN_OWNER_ID: ${{ secrets.AWS_DOMAIN_OWNER_ID }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/pauldaniv/yellow-taxi-scripts/build-java:1.0
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Silent dubious ownership of repository
+        run: git config --global --add safe.directory /__w/taxi-trip-api/taxi-trip-api
+      - name: Hack container for local development
+        if: ${{ env.ACT }}
+        run: |
+          curl -fsSL https://deb.nodesource.com/setup_14.x | bash -
+          apt-get install -y nodejs
+      - name: Cache gradle dependencies
+        uses: actions/cache@v3.2.4
+        env:
+          cache-name: cache-gradle
+        with:
+          # gradle cache files are stored in `~/.gradle` on Linux/macOS
+          path: ~/.gradle
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/build.gradle.kts') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: 17
+          distribution: 'temurin'
+      - name: Run Build
+        run: ci build
+      - name: Run Tests
+        run: ci test
+      - name: Publish artifacts
+        if: github.ref == 'refs/heads/main'
+        run: ci publish
+      - name: Deploy
+        env:
+          MANIFESTS_SHARED_TOKEN: ${{ secrets.MANIFESTS_SHARED_TOKEN }}
+        if: github.ref == 'refs/heads/main'
+        run: ci deploy
