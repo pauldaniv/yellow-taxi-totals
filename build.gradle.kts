@@ -28,7 +28,6 @@ repositories {
     mavenCentral()
     mavenLocal()
     maven { url = uri("https://repo.spring.io/milestone") }
-
 }
 
 dependencies {
@@ -48,10 +47,10 @@ tasks.getByName<Jar>("jar") {
     enabled = true
 }
 
-//val sourcesJar by tasks.creating(Jar::class) {
-//    archiveClassifier.set("sources")
-//    from(sourceSets["main"].allSource)
-//}
+val sourcesJar by tasks.creating(Jar::class) {
+    archiveClassifier.set("sources")
+    from(sourceSets["main"].allSource)
+}
 
 publishing {
     repositories {
@@ -68,7 +67,7 @@ publishing {
     publications {
         create<MavenPublication>("maven") {
             from(components["java"])
-//            artifact(sourcesJar)
+            artifact(sourcesJar)
         }
     }
 }
