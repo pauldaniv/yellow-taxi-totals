@@ -1,6 +1,6 @@
 package com.pauldaniv.promotion.yellowtaxi.totals.model;
 
-public class TaxiTrip {
+public class TaxiTripStats {
     private String id;
     private String name;
     private Long distance;

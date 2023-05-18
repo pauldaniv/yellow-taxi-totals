@@ -1,7 +1,8 @@
 package com.pauldaniv.promotion.yellowtaxi.totals.db.postgres;
 
+import com.pauldaniv.promotion.yellowtaxi.jooq.Tables;
+import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import com.pauldaniv.promotion.yellowtaxi.totals.db.TripDAO;
-import com.pauldaniv.promotion.yellowtaxi.totals.model.TaxiTrip;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
 
@@ -13,6 +14,7 @@ public class TripDAOPostgres implements TripDAO {
 
     @Override
     public List<TaxiTrip> getAll() {
-        return null;
+        return db.selectFrom(Tables.TAXI_TRIPS)
+                .fetchInto(TaxiTrip.class);
     }
 }
