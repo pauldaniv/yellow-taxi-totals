@@ -37,8 +37,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-jooq")
     implementation("com.fasterxml.jackson.core:jackson-databind")
-    implementation("com.pauldaniv.promotion.yellowtaxi:persistence:0.0.5-SNAPSHOT")
-    implementation("com.pauldaniv.promotion.yellowtaxi:api:0.0.5-SNAPSHOT")
+    implementation("com.pauldaniv.promotion.yellowtaxi:persistence:0.0.6-SNAPSHOT")
+    implementation("com.pauldaniv.promotion.yellowtaxi:api:0.0.6-SNAPSHOT")
 
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
