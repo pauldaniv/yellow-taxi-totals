@@ -10,6 +10,7 @@ public class TotalsService {
 
     @Cacheable("itemCache")
     public String run() {
+        log.info("msg=test_env env={}", System.getenv("MY_TEST_ENV"));
         try {
             Thread.sleep(120_000);
         } catch (InterruptedException e) {
