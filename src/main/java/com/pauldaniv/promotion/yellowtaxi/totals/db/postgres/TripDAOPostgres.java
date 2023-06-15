@@ -5,9 +5,11 @@ import com.pauldaniv.promotion.yellowtaxi.model.TaxiTrip;
 import com.pauldaniv.promotion.yellowtaxi.totals.db.TripDAO;
 import lombok.RequiredArgsConstructor;
 import org.jooq.DSLContext;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 @RequiredArgsConstructor
 public class TripDAOPostgres implements TripDAO {
     private final DSLContext db;

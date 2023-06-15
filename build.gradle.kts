@@ -2,7 +2,7 @@ plugins {
     idea
     java
     `maven-publish`
-    id("org.springframework.boot") version "3.1.0-M2"
+    id("org.springframework.boot") version "3.1.0"
     id("io.spring.dependency-management") version "1.1.0"
     id("io.freefair.lombok") version "8.0.1"
     id("nu.studer.jooq") version "8.2"
@@ -12,11 +12,13 @@ group = "com.pauldaniv.promotion.yellowtaxi.totals"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_17
 
-val awsDomainOwner: String = System.getenv("AWS_DOMAIN_OWNER_ID")
+val awsDomainOwner: String? = System.getenv("AWS_DOMAIN_OWNER_ID")
 val codeArtifactRepository = "https://promotion-${awsDomainOwner}.d.codeartifact.us-east-2.amazonaws.com/maven/releases/"
 val codeArtifactPassword: String? = System.getenv("CODEARTIFACT_AUTH_TOKEN")
 
 repositories {
+    mavenCentral()
+    mavenLocal()
     maven {
         name = "CodeArtifact"
         url = uri(codeArtifactRepository)
@@ -25,9 +27,6 @@ repositories {
             password = codeArtifactPassword
         }
     }
-    mavenCentral()
-    mavenLocal()
-    maven { url = uri("https://repo.spring.io/milestone") }
 }
 
 dependencies {
