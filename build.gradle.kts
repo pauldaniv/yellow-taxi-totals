@@ -40,6 +40,7 @@ dependencies {
 
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("org.testng:testng:7.8.0")
 }
 
 tasks.getByName<Jar>("jar") {
@@ -78,7 +79,7 @@ tasks.withType<JavaCompile> {
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+    useTestNG()
 }
 
 fun getParam(name: String, default: String? = ""): String? {
