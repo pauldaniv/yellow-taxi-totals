@@ -6,7 +6,6 @@ import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.Test;
 
 @Slf4j
-@SpringBootTest
 public class TotalsApplicationTest extends AbstractTestNGSpringContextTests {
     @Test
     public void loadContext() {
