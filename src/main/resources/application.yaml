@@ -5,8 +5,8 @@ spring:
     password: ${DB_PASS:letmeeeen}
     driver-class-name: org.postgresql.Driver
 
-  data.redis:
-    host: ${REDIS_HOSTNAME:localhost}
-    port: ${REDIS_PORT:6379}
+redis:
+  host: ${REDIS_HOSTNAME:localhost}
+  port: ${REDIS_PORT:6379}
 
   cache.type: redis

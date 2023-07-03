@@ -12,12 +12,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @RequiredArgsConstructor
 public class TotalsApplication implements CommandLineRunner {
     private final TotalsService totalsService;
+
     public static void main(String[] args) {
         SpringApplication.run(TotalsApplication.class, args);
     }
 
     @Override
     public void run(String... args) throws Exception {
-        log.info(totalsService.run());
+        totalsService.run();
     }
 }
