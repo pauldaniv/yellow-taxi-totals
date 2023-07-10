@@ -29,7 +29,7 @@ public class TotalsService {
             dayTotals.putIfAbsent(monthAndDay, BigDecimal.ZERO);
             dayTotals.computeIfPresent(monthAndDay,
                     (key, val) -> val.add(it.getTotalAmount()));
-        }, 10_000);
+        });
 
         monthTotals.forEach((key, value) -> jedis.set(String.valueOf(key), String.valueOf(value)));
         dayTotals.forEach((key, value) -> jedis.set(key, String.valueOf(value)));

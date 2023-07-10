@@ -6,14 +6,12 @@ import com.pauldaniv.promotion.yellowtaxi.totals.db.TripDAO;
 import com.pauldaniv.promotion.yellowtaxi.totals.model.TaxiTripAmountStats;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.jooq.Cursor;
 import org.jooq.DSLContext;
-import org.jooq.Record3;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 @Slf4j
 @Repository
@@ -28,21 +26,15 @@ public class TripDAOPostgres implements TripDAO {
     }
 
     @Override
-    public void processAll(Consumer<TaxiTripAmountStats> forEach, int batchSize) {
-        try (Cursor<Record3<Integer, Integer, BigDecimal>> cursor = db.select(
+    public void processAll(Consumer<TaxiTripAmountStats> forEach) {
+        try (final Stream<TaxiTripAmountStats> cursor = db.select(
+                        Tables.TAXI_TRIPS.DROP_OFF_YEAR,
                         Tables.TAXI_TRIPS.DROP_OFF_MONTH,
                         Tables.TAXI_TRIPS.DROP_OFF_DAY,
                         Tables.TAXI_TRIPS.TOTAL_AMOUNT)
                 .from(Tables.TAXI_TRIPS)
-                .fetchLazy()) {
-            int batch = 1;
-            while (cursor.hasNext()) {
-                log.info("processing_bach batch={}", batch);
-                cursor.fetchNext(batchSize)
-                        .into(TaxiTripAmountStats.class)
-                        .forEach(forEach);
-                batch++;
-            }
+                .fetchStreamInto(TaxiTripAmountStats.class)) {
+            cursor.forEach(forEach);
         }
     }
 }

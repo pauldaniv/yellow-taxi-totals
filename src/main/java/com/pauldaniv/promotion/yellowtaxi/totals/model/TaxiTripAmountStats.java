@@ -13,6 +13,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TaxiTripAmountStats {
+    @Column(name = "drop_off_year")
+    private Integer dropOffYear;
     @Column(name = "drop_off_month")
     private Integer dropOffMonth;
     @Column(name = "drop_off_day")
