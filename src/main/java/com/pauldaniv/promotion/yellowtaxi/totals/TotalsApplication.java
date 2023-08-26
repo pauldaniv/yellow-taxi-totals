@@ -18,7 +18,7 @@ public class TotalsApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(String... args) {
         totalsService.run();
     }
 }
