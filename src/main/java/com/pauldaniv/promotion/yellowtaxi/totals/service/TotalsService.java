@@ -27,8 +27,7 @@ public class TotalsService {
             monthTotals.computeIfPresent(it.getDropOffMonth(), (key, val) -> val.add(it.getTotalAmount()));
             final String monthAndDay = String.format("%s/%s", it.getDropOffMonth(), it.getDropOffDay());
             dayTotals.putIfAbsent(monthAndDay, BigDecimal.ZERO);
-            dayTotals.computeIfPresent(monthAndDay,
-                    (key, val) -> val.add(it.getTotalAmount()));
+            dayTotals.computeIfPresent(monthAndDay, (key, val) -> val.add(it.getTotalAmount()));
         });
 
         monthTotals.forEach((key, value) -> jedis.set(String.valueOf(key), String.valueOf(value)));

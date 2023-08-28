@@ -8,5 +8,6 @@ import java.util.function.Consumer;
 
 public interface TripDAO {
     List<TaxiTrip> getAll();
+
     void processAll(Consumer<TaxiTripAmountStats> forEach);
 }
