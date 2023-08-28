@@ -64,6 +64,10 @@ jobs:
         with:
           java-version: 17
           distribution: 'temurin'
+      - name: Deps
+        run: |
+          apt-get update
+          apt-get install postgresql-client -y
       - name: Run Build
         run: ci build
       - name: Run Tests
