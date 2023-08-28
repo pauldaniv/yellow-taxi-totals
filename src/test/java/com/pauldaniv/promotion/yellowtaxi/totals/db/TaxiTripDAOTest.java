@@ -45,18 +45,5 @@ public class TaxiTripDAOTest extends AbstractTransactionalTestNGSpringContextTes
 
         taxiTripDAO.processAll(records::add);
         assertThat(records).hasSize(1);
-        log.info("Records={}", taxiTripDAO.getAll());
-    }
-
-    @Test
-    public void getsRecordsSuccessfully() {
-        final TaxiTripsRecord taxiTripsRecord = db.newRecord(TAXI_TRIPS);
-        taxiTripsRecord.from(TaxiTrip.builder()
-                .build());
-        db.insertInto(TAXI_TRIPS)
-                .set(taxiTripsRecord)
-                .returning()
-                .fetchOneInto(TaxiTrip.class);
-        log.info("Records={}", taxiTripDAO.getAll());
     }
 }

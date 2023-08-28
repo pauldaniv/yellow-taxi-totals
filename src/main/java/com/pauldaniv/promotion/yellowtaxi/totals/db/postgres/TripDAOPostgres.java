@@ -20,12 +20,6 @@ public class TripDAOPostgres implements TripDAO {
     private final DSLContext db;
 
     @Override
-    public List<TaxiTrip> getAll() {
-        return db.selectFrom(Tables.TAXI_TRIPS)
-                .fetchInto(TaxiTrip.class);
-    }
-
-    @Override
     public void processAll(Consumer<TaxiTripAmountStats> forEach) {
         try (final Stream<TaxiTripAmountStats> cursor = db.select(
                         Tables.TAXI_TRIPS.DROP_OFF_YEAR,
